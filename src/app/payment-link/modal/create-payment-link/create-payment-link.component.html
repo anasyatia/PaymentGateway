@@ -1,0 +1,273 @@
+<div style="margin-left: 0.5%;" class="flex h-screen overflow-y-hidden">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+  
+    <!-- Main Content -->
+    <div class="flex-1 overflow-y-auto bg-gray-50">
+      <app-navbar></app-navbar>
+    <div class="p-6 flex flex-col min-screen">
+    <div class="bg-white rounded-lg shadow p-6">
+    <h3 class="mb-4 text-2xl font-semibold text-gray-800">Create Payment Link</h3>
+
+    <hr>
+  
+    <form [formGroup]="paymentLinkForm" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-2">
+      <!-- Title -->
+      <div class="mt-7 mb-8">
+        <label for="title" class="block text-medium text-gray-700 mb-5">Title (optional)</label>
+        <input type="text" id="title" formControlName="title" maxlength="40" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+      </div>
+      </div>
+
+      <hr>
+  
+      <!-- Customer Details -->
+      <h3 class="text-lg font-medium text-gray-900 mt-4">Customer Details</h3>
+      <fieldset class="mt-3 mb-5">
+        <legend class="text-sm text-gray-900">Require Customer Details</legend>
+        <div class="flex gap-7 mt-2">
+          <div class="flex items-center">
+            <input id="details-yes" type="radio" formControlName="customerDetails" value="Yes" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="details-yes" class="ml-1 block text-sm text-gray-700">Yes</label>
+          </div>
+          <div class="flex items-center">
+            <input id="details-optional" type="radio" formControlName="customerDetails" value="Optional" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="details-optional" class="ml-1 block text-sm text-gray-700">Optional</label>
+          </div>
+          <div class="flex items-center">
+            <input id="details-no" type="radio" formControlName="customerDetails" value="No" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="details-no" class="ml-1 block text-sm text-gray-700">No</label>
+          </div>
+        </div>
+      
+        <legend class="mt-5 text-sm text-gray-700">Require Customer Address</legend>
+        <div class="flex gap-7 mt-2">
+          <div class="flex items-center">
+            <input 
+              id="require-address-yes" 
+              type="radio" 
+              formControlName="requireCustomerAddress" 
+              value="Yes" 
+              class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="require-address-yes" class="ml-1 block text-sm text-gray-700">Yes</label>
+          </div>
+          <div class="flex items-center">
+            <input 
+              id="require-address-no" 
+              type="radio" 
+              formControlName="requireCustomerAddress" 
+              value="No" 
+              class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="require-address-no" class="ml-1 block text-sm text-gray-700">No</label>
+          </div>
+        </div>
+
+        <legend class="mt-5 text-sm text-gray-700">Specify Customer Details</legend>
+        <div class="flex gap-7 mt-2">
+          <div class="flex items-center">
+            <input 
+              id="details-yes" 
+              type="radio" 
+              formControlName="specifyCustomerDetails" 
+              value="Yes" 
+              class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="details-yes" class="ml-1 block text-sm text-gray-700">Yes</label>
+          </div>
+          <div class="flex items-center">
+            <input 
+              id="details-no" 
+              type="radio" 
+              formControlName="specifyCustomerDetails" 
+              value="No" 
+              class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="details-no" class="ml-1 block text-sm text-gray-700">No</label>
+          </div>
+      </div>
+
+      <!-- Tampilkan app-customer-details jika pilihannya 'Yes' -->
+      <app-customer-details *ngIf="customerDetailsControl?.value === 'Yes'"></app-customer-details>
+      </fieldset>
+
+      <hr>
+      
+      <!-- Order Details -->
+      <h3 class="text-lg font-medium text-gray-900 mt-4">Order Details</h3>
+      <div class="mt-4 mb-5 grid grid-cols-2 gap-3">
+        <div>
+          <label for="paymentLink" class="block text-xs text-gray-700 font-medium">Payment Link ID</label>
+          <input type="text" id="paymentLink" formControlName="paymentLinkID" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+        </div>
+      
+        <div>
+          <label for="orderId" class="block text-xs text-gray-700 font-medium">Order ID</label>
+          <input type="text" id="orderId" formControlName="orderID" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+        </div>
+        <p class="block text-xs text-gray-700 mb-2">This will be the URL that you can copy and share.</p>
+      </div>      
+
+      <hr>
+
+      <!-- Expiry Time -->
+      <h3 class="text-lg font-medium text-gray-900 mt-4">Expiry Time</h3>
+      <div class="grid grid-cols-2">
+        <div class="mt-5 mb-5">
+          <label for="expiry-time" class="block text-xs text-gray-700">Select Expiry Time</label>
+          <select id="expiry-time" formControlName="expiryTime" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1 mt-2">
+            <option value="1 day">1 day</option>
+            <option value="7 days">7 days</option>
+            <option value="1 month">1 month</option>
+            <option value="3 months">3 months</option>
+            <option value="6 months">6 months</option>
+            <option value="1 year">1 year</option>
+            <option value="no expiry">No Expiry</option>
+          </select>
+        </div>
+      </div>
+
+      <hr>
+  
+      <!-- Maximum Usage -->
+      <h3 class="text-lg font-medium text-gray-900 mt-4">Maximum Usage</h3>
+      <div class="grid grid-cols-2">
+        <div class="mt-4 mb-5">
+          <label for="maximum-usage" class="block text-xs text-gray-700">Maximum Usage</label>
+          <input type="number" id="maximum-usage" formControlName="maximumUsage" min="1" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1 mt-2">
+        </div>
+      </div>
+
+      <hr>
+  
+      <!-- Payment Methods -->
+      <h3 class="text-lg font-medium text-gray-900 mt-4">Payment Methods</h3>
+      <fieldset class="mt-2 mb-5">
+        <div class="flex items-center mt-2">
+          <input id="all-methods" type="checkbox" formControlName="allPaymentMethods" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" (change)="onCheckboxChange('all')">
+          <label for="all-methods" class="ml-3 block text-sm font-medium text-gray-700 mr-4">All Payment Methods</label>
+        </div>
+      
+        <div class="flex items-center mt-2">
+          <input id="selected-methods" type="checkbox" formControlName="selectedPaymentMethods" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" (change)="onCheckboxChange('selected')">
+          <label for="selected-methods" class="ml-3 block text-sm font-medium text-gray-700">Selected Payment Methods</label>
+      
+        </div>
+        <button (click)="openPaymentMethods()" type="button" class="text-sm mt-4 bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded mr-2">Advanced Payment Settings</button>
+        <app-payment-methods *ngIf="isPaymentMethodsOpen" (close)="closePaymentMethods()"></app-payment-methods>
+        <button *ngIf="showEditButton" (click)="openSelectPaymentMethods()" type="button" class="text-sm mt-4 bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded" (click)="openEdit()">Edit</button>
+        <app-select-payment-methods *ngIf="isSelectPaymentMethodsOpen" (close)="closeSelectPaymentMethods()"></app-select-payment-methods>
+      </fieldset>    
+
+      <hr>
+  
+      <!-- Custom Field -->
+      <h3 class="text-lg font-medium text-gray-900 mt-4">Custom Field</h3>
+       <div class="grid grid-cols-2">
+        <div class="mt-4 mb-5">
+          <label for="custom-field" class="block text-xs text-gray-700">Custom Field</label>
+          <input type="text" id="custom-field" formControlName="customField" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+        </div>
+       </div>
+
+      <hr>
+  
+      <h3 class="text-lg font-medium text-gray-900 mt-4">Transaction Amount</h3>
+      <div class="mt-4 mb-5">
+        <!-- Checkbox to allow customer to customize amount -->
+        <div class="flex items-center">
+          <input id="allow-custom-amount" type="checkbox" formControlName="allowCustomAmount"
+            class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+          <label for="allow-custom-amount" class="ml-3 block text-sm font-medium text-gray-700">
+            Allow customer to customize amount
+          </label>
+        </div>
+      
+        <!-- Additional checkboxes, shown conditionally -->
+        <div *ngIf="allowCustomAmount" class="mt-2">
+          <div class="flex items-center">
+            <input id="suggest-preset-amount" type="checkbox" formControlName="suggestPresetAmount"
+              class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="suggest-preset-amount" class="ml-3 block text-sm font-medium text-gray-700">
+              Suggest a preset amount
+            </label>
+          </div>
+          <div class="mt-4 mb-5 grid grid-cols-2 gap-3" *ngIf="suggestPresetAmount && allowCustomAmount">
+            <div>
+              <label for="presetAmount" class="block text-xs text-gray-700 font-medium">Preset Amount</label>
+              <input type="number" id="presetAmount" formControlName="presetAmount"
+                class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+            </div>
+          </div>
+      
+          <div class="flex items-center mt-2">
+            <input id="set-limits" type="checkbox" formControlName="setLimits"
+              class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="set-limits" class="ml-3 block text-sm font-medium text-gray-700">Set limits</label>
+          </div>
+          <div class="mt-4 mb-5 grid grid-cols-2 gap-3" *ngIf="setLimits && allowCustomAmount">
+            <div>
+              <label for="minAmount" class="block text-xs text-gray-700 font-medium">Minimum Amount</label>
+              <input type="number" id="minAmount" formControlName="minAmount"
+                class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+            </div>
+            <div>
+              <label for="maxAmount" class="block text-xs text-gray-700 font-medium">Maximum Amount</label>
+              <input type="number" id="maxAmount" formControlName="maxAmount"
+                class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+            </div>
+          </div>
+        </div>
+      </div> 
+      
+      <!-- Conditionally show items table if allowCustomAmount is unchecked -->
+      <div *ngIf="allowCustomAmount === false" class="mt-3 mb-5">
+        <h3 class="text-lg font-medium text-gray-900 mb-2">Items</h3>
+      
+        <!-- Menyambungkan FormArray "items" -->
+        <div formArrayName="items">
+          <div class="bg-gray-200 grid grid-cols-6 gap-2 mb-2 p-3">
+            <label class="text-sm font-medium text-gray-700 col-span-1">Item ID</label>
+            <label class="text-sm font-medium text-gray-700 col-span-2">Item Name</label>
+            <label class="text-sm font-medium text-gray-700 col-span-1">Item Price (IDR)</label>
+            <label class="text-sm font-medium text-gray-700 col-span-1">Qty</label>
+          </div>
+      
+          <!-- Pengulangan untuk setiap item di FormArray -->
+          <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="grid grid-cols-6 gap-2 mb-2">
+            <input type="text" formControlName="itemId" class="col-span-1 border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+            <input type="text" formControlName="itemName" class="col-span-2 border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+            <input type="number" formControlName="itemPrice" class="col-span-1 border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1" (input)="calculateTotal()">
+            <input type="number" formControlName="itemQty" min="1" class="col-span-1 border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1" (input)="calculateTotal()">
+            
+            <div class="col-span-1 flex items-center justify-center">
+              <button type="button" 
+                      class="text-xs bg-transparent hover:bg-red-500 text-red-700 hover:text-white py-1 px-2 border border-red-500 hover:border-transparent rounded self-center"
+                      (click)="removeItem(i)">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      
+        <div class="flex mt-4 mb-5 grid grid-cols-6 gap-2">
+          <div class="col-span-5">
+            <label for="totalAmount" class="block text-xs text-gray-700 font-medium">Total Amount</label>
+            <input type="number" id="totalAmount" [value]="totalAmount" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1" readonly>
+          </div>
+          <div class="col-span-1 flex items-center justify-center">
+            <button type="button" class="text-xs mt-4 bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded" (click)="addItem()">Add Item</button>
+          </div>
+        </div>
+      </div>      
+      
+      <!-- Submit Button -->
+      <div class="mt-6">
+        <button type="submit"
+          class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Create Payment Link
+        </button>
+      </div>      
+    </form>
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,66 @@
+<div class="flex h-screen overflow-y-hidden bg-[#FAFAFA]">
+  <div style="margin-left: 0.5%">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 overflow-y-auto">
+    <app-navbar></app-navbar>
+    <div class="p-4">
+      <div class="p-8">
+        <!-- Activation Steps -->
+        <div class="bg-white p-6 rounded-lg shadow mb-6">
+          <h3 class="text-lg font-semibold mb-4">Midtrans account activation steps</h3>
+          <div class="flex space-x-8">
+            <div class="text-center">
+              <div class="bg-green-200 text-green-600 rounded-full w-12 h-12 flex items-center justify-center mx-auto">1</div>
+              <p class="mt-2">Account registration</p>
+              <p class="text-green-600 mt-1">Done</p>
+            </div>
+            <div class="text-center">
+              <div class="bg-gray-200 text-gray-600 rounded-full w-12 h-12 flex items-center justify-center mx-auto">2</div>
+              <p class="mt-2">Business registration</p>
+              <p class="text-gray-600 mt-1">Not started</p>
+            </div>
+            <div class="text-center">
+              <div class="bg-gray-200 text-gray-600 rounded-full w-12 h-12 flex items-center justify-center mx-auto">3</div>
+              <p class="mt-2">Business review</p>
+              <p class="text-gray-600 mt-1">Not started</p>
+            </div>
+            <div class="text-center">
+              <div class="bg-gray-200 text-gray-600 rounded-full w-12 h-12 flex items-center justify-center mx-auto">4</div>
+              <p class="mt-2">Result</p>
+              <p class="text-gray-600 mt-1">Not started</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-4">Summary</h3>
+          <div class="flex space-x-8">
+            <div>
+              <p class="text-2xl font-semibold">Rp. 0</p>
+              <p class="text-gray-600">Total Volume</p>
+              <p class="text-gray-400">Month to Date</p>
+            </div>
+            <div>
+              <p class="text-2xl font-semibold">0</p>
+              <p class="text-gray-600">Total Transaction</p>
+              <p class="text-gray-400">Month to Date</p>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="flex space-x-4">
+          <div>
+            <app-issung-bank></app-issung-bank>
+          </div>
+          <div>
+            <app-payment-type></app-payment-type>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

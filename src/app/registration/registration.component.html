@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="margin-top: 50px;" class="bg-gray-100 h-screen overflow-y-auto">
+    <div class="flex justify-center items-center min-h-screen">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-6 text-blue-800">Registration</h2>
+            <p class="mb-4 text-gray-600">The email & telephone number provided will be used to login to the Midtrans portal, receive reports, validate bank account, and many more.</p>
+            
+            <!-- Business Name -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Business Name</label>
+                <input type="text" class="w-full mt-2 p-2 border border-gray-300 rounded-md" placeholder="Enter your business name">
+            </div>
+
+            <!-- Full Name -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Full Name</label>
+                <input type="text" class="w-full mt-2 p-2 border border-gray-300 rounded-md" placeholder="Enter your full name">
+            </div>
+
+            <!-- Business Email -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Business Email</label>
+                <input type="email" class="w-full mt-2 p-2 border border-gray-300 rounded-md" placeholder="Enter your email">
+                <small class="text-gray-500">We will send a verification link to this email</small>
+            </div>
+
+            <!-- Business Phone Number -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Business Phone Number</label>
+                <div class="flex">
+                    <span class="inline-flex items-center px-3 bg-gray-200 text-gray-700 rounded-l-md border border-r-0 border-gray-300">+62</span>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded-r-md" placeholder="813xxxxxxx">
+                </div>
+            </div>
+
+            <!-- Business Legality -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Business Legality</label>
+                <div class="mt-2">
+                    <label class="inline-flex items-center">
+                        <input type="radio" class="form-radio" name="legality" value="entity">
+                        <span class="ml-2">My business has form of legal entity such as PT, CV, Yayasan, Koperasi, PMA or PP.</span>
+                    </label>
+                </div>
+                <div class="mt-2">
+                    <label class="inline-flex items-center">
+                        <input type="radio" class="form-radio" name="legality" value="no_entity">
+                        <span class="ml-2">I am online/offline business owner, and my business has no business entity.</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Password</label>
+                <input type="password" class="w-full mt-2 p-2 border border-gray-300 rounded-md" placeholder="Enter your password">
+                <small class="text-gray-500">Minimum 8 characters including capital & small letters (A-Z), and numbers (1-9)</small>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+                <label class="block text-gray-700">Confirm Password</label>
+                <input type="password" class="w-full mt-2 p-2 border border-gray-300 rounded-md" placeholder="Please retype your password">
+            </div>
+
+            <!-- Terms and Policy -->
+            <div class="mb-6">
+                <label class="inline-flex items-center">
+                    <input type="checkbox" class="form-checkbox text-blue-600">
+                    <span class="ml-2">By proceeding, you understand and agree to our use of the information that you submit in accordance with the provisions of the <a href="#" class="text-blue-600 underline">Privacy Policy</a>.</span>
+                </label>
+            </div>
+
+            <!-- Register Button -->
+            <div>
+                <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Register</button>
+            </div>
+
+            <!-- Login Link -->
+            <div class="mt-4 text-center">
+                <p class="text-gray-600">Already have an account? <a href="/login" class="text-blue-600 underline">Login</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

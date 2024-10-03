@@ -1,0 +1,245 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<div style="margin-left: 0.5%" class="flex">
+    <app-sidebar></app-sidebar>
+  
+    <div class="flex-1 bg-gray-50">
+    <app-navbar></app-navbar>
+    <div class="flex flex-col p-8 min-screen">
+    <h1 class="text-3xl font-semibold text-gray-700 mb-4">Balance</h1>
+  
+    <div class="flex border-b border-gray-300 mb-4">
+      <button class="py-2 px-4 text-black-500 hover:text-blue-600 focus:outline-none"
+      [class.text-blue-600]="secondaryTab === 'balance'"
+      [class.border-b-2]="secondaryTab === 'balance'"
+      [class.border-blue-600]="secondaryTab === 'balance'"
+      (click)="setSecondaryTab('balance')"
+      >Balance</button>
+      <button class="py-2 px-4 text-black-500 hover:text-blue-600 focus:outline-none"
+      [class.text-blue-600]="secondaryTab === 'bankaccoutinfo'"
+      [class.border-b-2]="secondaryTab === 'bankaccoutinfo'"
+      [class.border-blue-600]="secondaryTab === 'bankaccoutinfo'"
+      (click)="setSecondaryTab('bankaccoutinfo')">
+      Bank Account Info</button>
+    </div>
+
+    <div *ngIf="secondaryTab === 'balance'" class="p-2">
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex justify-between border-b border-gray-300 mb-4 items-center">
+          <div class="flex space-x-4">
+            <button
+              class="hover:text-blue-600 py-2 px-4"
+              [class.text-blue-600]="activeTab === 'statement'"
+              [class.border-b-2]="activeTab === 'statement'"
+              [class.border-blue-600]="activeTab === 'statement'"
+              (click)="setActiveTab('statement')"
+            >
+              Statement
+            </button>
+            <button
+              class="hover:text-blue-600 py-2 px-4"
+              [class.text-blue-600]="activeTab === 'withdrawal'"
+              [class.border-b-2]="activeTab === 'withdrawal'"
+              [class.border-blue-600]="activeTab === 'withdrawal'"
+              (click)="setActiveTab('withdrawal')"
+            >
+              Withdrawal List
+            </button>
+          </div>
+      
+          <button class="bg-gray-200 text-gray-600 py-2 px-4   rounded hover:bg-gray-300 flex items-center">
+            <span class="material-symbols-outlined mr-2">
+              upgrade
+              </span>
+            Export
+          </button>                  
+          <app-filter-modal *ngIf="isFilterOpen" (close)="closeFilter()"></app-filter-modal>
+          <app-date-range-modal *ngIf="isDateOpen" (close)="closeDate()"></app-date-range-modal>
+        </div>
+      
+          <div *ngIf="activeTab === 'statement'" class="p-2">
+            <div class="space-x-4">
+              
+            </div>
+            <div class="flex items-center mb-4">
+              <!-- Dropdown button -->
+              <button
+              id="dropdown-button"
+              class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-e-0 border-gray-300 dark:border-gray-700 dark:text-white rounded-s hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              type="button"
+            >
+            <select class="bg-transparent outline-none" (change)="onOptionChange($event)">
+                <option value="Order ID">Order ID</option>
+                <option value="Transaction ID">Transaction ID</option>
+              </select>
+            </button>
+          
+            <!-- Search input with SVG icon on the left -->
+            <div class="relative w-2/5 flex items-center">
+              <span class="absolute left-2 top-1/2 transform -translate-y-1/2">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                  <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/>
+                </svg>
+              </span>
+              <input
+                type="text"
+                [placeholder]="getPlaceholder()"
+                class="pl-10 rounded-e p-2 hover:bg-gray-200 p-2 border border-gray-300 dark:border-gray-600 text-left w-full focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+              />
+            </div>
+            
+              <!-- Filter button with icon on the right -->
+              <button
+                (click)="openFilter()"
+                class="ml-4 w-48 hover:bg-gray-200 rounded p-2 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-left flex justify-between items-center"
+              >
+                Filter
+                <i class="material-icons ml-2">arrow_drop_down</i> <!-- Icon arrow on the right -->
+              </button>
+            
+              <!-- Date Range button with icon on the right -->
+              <button
+                (click)="openDate()"
+                class="ml-4 w-56 rounded hover:bg-gray-200 p-2 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-left flex justify-between items-center"
+              >
+                Date Range
+                <i class="material-icons ml-2">calendar_today</i> <!-- Icon calendar on the right -->
+              </button>
+            
+              <!-- Apply button -->
+              <button class="ml-4 w-24 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                Apply
+              </button>
+            </div>                                   
+            
+            <table class="min-w-full bg-white">
+              <thead>
+                <tr class="w-full border-b border-gray-200">
+                  <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                  <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                  <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                  <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr>
+                  <td class="py-4 px-6 text-sm font-medium text-gray-900">#12345</td>
+                  <td class="py-4 px-6 text-sm text-gray-500">2024-09-10</td>
+                  <td class="py-4 px-6 text-sm text-gray-500">$100.00</td>
+                  <td class="py-4 px-6 text-sm text-green-500">Completed</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div *ngIf="activeTab === 'withdrawal'" class="p-2">
+            <div class="flex space-x-4 mb-4 items-center dark:border-gray-600">
+              <div class="relative flex-1">
+                <span class="absolute left-2 top-1/2 transform -translate-y-1/2">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                    <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/>
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  placeholder="Type withdrawal ID here"
+                  class="pl-10 rounded p-2 hover:bg-gray-200 rounded p-2 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-left w-full"
+                />
+              </div>
+            
+              <select class="w-48 rounded p-2 hover:bg-gray-200 rounded p-2 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-left">
+                <option>Status</option>
+                <option>Pending</option>
+                <option>Completed</option>
+                <option>Failed</option>
+              </select>
+            
+              <div class="relative">
+                <button
+                  (click)="openReqDate()"
+                  class="w-56 rounded hover:bg-gray-200 p-2 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-left flex items-center justify-between"
+                >
+                  Date Requested
+                  <span class="ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                      <path d="M640-440h80v-80h-80v80Zm-200 0h80v-80h-80v80Zm-200 0h80v-80h-80v80ZM160-120q-33 0-56.5-23.5T80-200v-560q0-33 23.5-56.5T160-840h80v-80h80v80h320v-80h80v80h80q33 0 56.5 23.5T880-760v560q0 33-23.5 56.5T800-120H160Zm0-160v200h640v-560H160v560Zm0-560v560-560Z"/>
+                    </svg>
+                  </span>
+                </button>
+                <app-requested-date *ngIf="isReqDateOpen" (close)="closeReqDate()"></app-requested-date>
+              </div>
+              <button class="w-24 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+                Apply
+              </button>
+            </div>            
+
+            <table class="min-w-full bg-white">
+                <thead>
+                <tr class="w-full border-b border-gray-200">
+                    <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Withdrawal ID
+                    </th>
+                    <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Date
+                    </th>
+                    <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Amount
+                    </th>
+                    <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                <tr>
+                    <td class="py-4 px-6 text-sm font-medium text-gray-900">123</td>
+                    <td class="py-4 px-6 text-sm text-gray-500">07-07-07</td>
+                    <td class="py-4 px-6 text-sm text-gray-500">18</td>
+                    <td
+                    class="py-4 px-6 text-sm"
+                    >
+                    failed
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+                </tbody>
+            </table>
+          </div>      
+      </div>
+    </div>
+
+    <div *ngIf="secondaryTab === 'bankaccoutinfo'" class="p-2">
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="justify-between flex">
+          <div class="flex mt-1">
+            <span class="material-symbols-outlined mr-3">
+              account_balance
+              </span>
+            <h1 class="text-lg text-gray-700 mb-4">Withdrawal bank</h1>
+          </div>
+          <div class="mr-1">
+            <button class="text-black flex items-center py-1 px-2 text-sm hover:bg-gray-100 rounded">
+                <span class="text-blue-600 material-symbols-outlined mr-1 text-xs">
+                    edit
+                </span>
+                Edit
+            </button>
+        </div>        
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+    <!-- Alert Message
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6" role="alert">
+      <p>To start receiving payment and withdraw the balance to your bank account, you're required to complete your business registration. <a href="#" class="text-blue-600 underline">Click here</a>.</p>
+    </div> -->
+
+    <!-- <footer class= "mt-auto">
+        <p style="margin: 10px;">© 2012 - 2024 Midtrans. All Rights Reserved | FAQ | Terms & Conditions</p>
+      </footer> -->
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
+  <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-xl font-semibold">Select Filter</h3>
+      <button (click)="closeModal()" class="text-red-600 hover:text-red-900 focus:outline-none">Close</button>
+    </div>
+
+    <!-- Description -->
+    <p class="text-sm text-gray-600 mb-6">
+      Please select a transaction type to filter down the data. Once selected, you can also specify the status and its channel.
+    </p>
+
+    <!-- Filter Options -->
+    <div class="grid grid-cols-3 gap-6">
+      <!-- Transaction Type -->
+      <div>
+        <h4 class="font-semibold mb-3">Transaction Type</h4>
+        <ul class="space-y-2">
+          <li class="flex items-center">
+            <input type="checkbox" id="all" class="mr-2" checked />
+            <label for="all" class="text-gray-700">All</label>
+          </li>
+          <li class="flex items-center">
+            <input type="checkbox" id="balance-transfer" class="mr-2" />
+            <label for="balance-transfer" class="text-gray-700">Balance Transfer</label>
+          </li>
+          <li class="flex items-center">
+            <input type="checkbox" id="fee" class="mr-2" />
+            <label for="fee" class="text-gray-700">Fee</label>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Status -->
+      <div>
+        <h4 class="font-semibold mb-3">Status</h4>
+        <div>
+          <h5 class="font-medium mb-2 text-sm text-gray-800">Balance Transfer</h5>
+          <ul class="space-y-2 ml-2">
+            <li class="flex items-center">
+              <input type="checkbox" id="success-bt" class="mr-2" />
+              <label for="success-bt" class="text-gray-700">Success</label>
+            </li>
+          </ul>
+          <h5 class="font-medium mt-4 mb-2 text-sm text-gray-800">Fee</h5>
+          <ul class="space-y-2 ml-2">
+            <li class="flex items-center">
+              <input type="checkbox" id="success-fee" class="mr-2" />
+              <label for="success-fee" class="text-gray-700">Success</label>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Channel -->
+      <div>
+        <h4 class="font-semibold mb-3">Channel</h4>
+        <div class="mb-3">
+          <input type="text" class="border border-gray-300 rounded px-3 py-2 w-full" placeholder="Search" />
+        </div>
+        <h5 class="font-medium mb-2 text-sm text-gray-800">Balance Transfer</h5>
+        <ul class="space-y-2 ml-2">
+          <li class="flex items-center">
+            <input type="checkbox" id="partner-to-merchant" class="mr-2" />
+            <label for="partner-to-merchant" class="text-gray-700">Partner to Merchant</label>
+          </li>
+          <li class="flex items-center">
+            <input type="checkbox" id="merchant-to-partner" class="mr-2" />
+            <label for="merchant-to-partner" class="text-gray-700">Merchant to Partner</label>
+          </li>
+          <li class="flex items-center">
+            <input type="checkbox" id="merchant-to-merchant" class="mr-2" />
+            <label for="merchant-to-merchant" class="text-gray-700">Merchant to Merchant</label>
+          </li>
+        </ul>
+        <h5 class="font-medium mt-4 mb-2 text-sm text-gray-800">Fee</h5>
+        <ul class="space-y-2 ml-2">
+          <li class="flex items-center">
+            <input type="checkbox" id="invoicing-fee" class="mr-2" />
+            <label for="invoicing-fee" class="text-gray-700">Invoicing Fee</label>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="flex justify-between mt-8">
+      <button (click)="closeModal()" class="text-blue-600 focus:outline-none">Clear</button>
+      <button (click)="applyFilter()" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none">Add Filter</button>
+    </div>
+  </div>
+</div>

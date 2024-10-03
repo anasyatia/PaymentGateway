@@ -1,0 +1,33 @@
+button {
+  display: flex;
+  align-items: center;
+}
+
+.material-symbols-outlined {
+  margin-left: 75px;
+}
+
+.select-hover:hover {
+  background-color: #f0f0f0;
+}
+
+.button-hover:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.button-hover:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.button-apply-hover:hover {
+  background-color: #4b5563;
+  cursor: pointer;
+}
+
+.border-hover:hover button {
+  background-color: #f0f0f0;
+}
+
+

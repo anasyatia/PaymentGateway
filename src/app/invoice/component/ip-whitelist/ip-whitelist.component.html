@@ -1,0 +1,58 @@
+<div class="flex ">
+  <div style="margin-left: 0.5%">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="flex-1">
+    <app-navbar></app-navbar>
+    <div class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold mb-4">IP Whitelist</h1>
+
+      <div class="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-600 p-4 mb-4 rounded-md">
+        <p>
+          This is a security setting that will make the map only accessible from IP addresses listed in the table below.
+          Should you enter the wrong IP address, your access to the MAP will be lost.
+          Please make sure you have the correct IP address before adding it to the whitelist.
+        </p>
+      </div>
+        <br>
+      <div class="bg-white p-6 rounded-lg shadow mb-6">
+        <h2 class="text-lg font-semibold mb-2">Setting IP</h2>
+        <p class="text-gray-600 mb-4">Your current IP address is <span class="font-bold text-gray-800">172.71.81.67</span></p>
+
+        <div class="flex items-center mb-4">
+          <input
+            type="text"
+            placeholder="Type IP Address"
+            class="border border-gray-300 rounded-md p-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+          />
+          <button class="bg-blue-600 text-white px-4 py-2 rounded-md ml-2 hover:bg-blue-700 transition duration-200">Add</button>
+        </div>
+
+        <!-- <h3 class="text-md font-semibold mb-2">IP Address Whitelist</h3> -->
+        <!-- <table class="min-w-full border border-gray-300">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-300 p-2 text-left">IP Address</th>
+              <th class="border border-gray-300 p-2 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-300 p-2">192.168.1.1</td>
+              <td class="border border-gray-300 p-2">
+                <button class="text-red-600 hover:text-red-800">Remove</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-300 p-2">172.71.81.67</td>
+              <td class="border border-gray-300 p-2">
+                <button class="text-red-600 hover:text-red-800">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
+      </div>
+    </div>
+
+    </div>
+  </div>

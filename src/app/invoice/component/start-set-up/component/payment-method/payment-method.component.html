@@ -1,0 +1,55 @@
+<h2 class="text-xl font-semibold mb-4">Payment method</h2>
+<div class="bg-white p-6 shadow-md rounded-lg border border-gray-200">
+  <!-- Payment Link Section -->
+  <div class="mb-6">
+    <h3 class="text-base font-medium mb-2">Payment Link</h3>
+    <p class="text-sm text-gray-500">Payment Link can be specified as required when creating an invoice.</p>
+    <hr class="my-4 border-gray-200">
+  </div>
+
+  <div class="mb-6">
+    <h3 class="text-base font-medium mb-2">Virtual Account</h3>
+
+    <!-- Bank (optional) -->
+    <div class="flex items-center space-x-4 mb-4">
+      <label for="bank" class="text-sm font-medium text-gray-700">Bank (optional)</label>
+      <select id="bank" name="bank" class="flex-1 rounded-md border border-gray-300 bg-gray-100 py-2 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        <option>Select VA acquiring bank</option>
+      </select>
+    </div>
+
+    <!-- Expiry time (optional) -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">Expiry time (optional)</label>
+      <div class="flex space-x-4">
+        <!-- Radio button for "Same as due date" -->
+        <div class="flex items-center">
+          <input id="same-as-due-date" name="expiry-time" type="radio" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" [(ngModel)]="expiryTime" value="same" (change)="onExpiryTimeChange()">
+          <label for="same-as-due-date" class="ml-2 block text-sm text-gray-700">Same as due date</label>
+        </div>
+
+        <!-- Radio button for "Custom" -->
+        <div class="flex items-center">
+          <input id="custom" name="expiry-time" type="radio" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" [(ngModel)]="expiryTime" value="custom" (change)="onExpiryTimeChange()">
+          <label for="custom" class="ml-2 block text-sm text-gray-700">Custom</label>
+        </div>
+      </div>
+
+
+      <!-- Custom Expiry Time Input -->
+      <div *ngIf="expiryTime === 'custom'" class="mt-4 space-y-4">
+        <div>
+          <label for="custom-expiry-amount" class="block text-sm font-medium text-gray-700">Set custom expiry time</label>
+          <div class="flex items-center space-x-2">
+            <input type="number" id="custom-expiry-amount" class="mt-1 block w-24 rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" [(ngModel)]="customExpiryAmount" min="1">
+            <select id="custom-expiry-type" class="mt-1 block w-36 rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" [(ngModel)]="customExpiryType">
+              <option value="" disabled selected hidden>select</option>
+              <option value="days">Days</option>
+              <option value="hours">Hours</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

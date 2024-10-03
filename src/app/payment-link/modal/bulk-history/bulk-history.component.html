@@ -1,0 +1,48 @@
+<div style="margin-left: 0.5%;" class="flex">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+  
+    <!-- Main Content -->
+    <div class="flex-1 bg-gray-50">
+      <app-navbar></app-navbar>
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h1 class="text-2xl font-semibold text-gray-800">Bulk Upload</h1>
+          <div class="flex space-x-4">
+            <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg">
+              Download CSV Template
+            </button>
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+              Upload CSV
+            </button>
+          </div>
+        </div>
+      
+        <div class="bg-white rounded-lg shadow-lg p-4">
+          <div class="mb-4">
+            <p class="text-sm text-gray-600">Maximum CSV file size 50 KB</p>
+          </div>
+      
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr>
+                <th class="py-2 px-4 border-b-2 text-left text-sm font-semibold text-gray-600">Upload Date</th>
+                <th class="py-2 px-4 border-b-2 text-left text-sm font-semibold text-gray-600">Status</th>
+                <th class="py-2 px-4 border-b-2 text-left text-sm font-semibold text-gray-600">File Name</th>
+                <th class="py-2 px-4 border-b-2 text-left text-sm font-semibold text-gray-600">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Jika ada data, render di sini -->
+              <tr>
+                <td class="py-2 px-4 border-b text-sm text-gray-700">[Upload Date]</td>
+                <td class="py-2 px-4 border-b text-sm text-gray-700">[Status]</td>
+                <td class="py-2 px-4 border-b text-sm text-gray-700">[File Name]</td>
+                <td class="py-2 px-4 border-b text-sm text-gray-700">[Action]</td>
+              </tr>
+              <!-- Tambahkan lebih banyak baris jika diperlukan -->
+            </tbody>
+          </table>
+        </div>
+      </div>      
+    </div>

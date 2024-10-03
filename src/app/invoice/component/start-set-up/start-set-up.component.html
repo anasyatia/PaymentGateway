@@ -1,0 +1,330 @@
+<div class="flex h-screen overflow-y-hidden ">
+  <div style="margin-left: 0.5%">
+    <app-sidebar></app-sidebar>
+  </div>  <div class="flex-1 overflow-y-auto">
+    <app-navbar></app-navbar>
+
+    <div class="min-h-screen bg-gray-50 p-8">
+      <div class="flex justify-between items-center mb-6">
+        <a routerLink="/invoice" class="flex items-center text-blue-600 text-sm font-medium">
+          <span class="material-symbols-outlined">
+            arrow_back
+          </span>
+          <span class="ml-2">Back to Invoicing page</span>
+        </a>
+        <div class="flex space-x-4">
+          <button type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" [routerLink]="['/invoice']">Cancel</button>
+          <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Save</button>
+        </div>
+      </div>
+      <h1 class="text-3xl font-semibold mb-6">Invoice Settings</h1>
+      <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-12 md:col-span-6 space-y-6">
+          <h2 class="text-xl font-semibold mb-4">Invoice Header</h2>
+          <div class="bg-white p-6 shadow rounded-lg">
+            <div class="space-y-4">
+              <!-- Business Logo -->
+              <div class="space-y-4">
+                <label class="block text-sm font-medium mb-2">Business logo (optional)</label>
+                <div class="relative flex items-center p-4">
+                  <input type="file" id="logoInput" class="hidden" *ngIf="!imageSrc" (change)="onLogoFileChange($event)" />
+                  <label for="logoInput" class="bg-gray-200 text-gray-600 py-1 px-2 rounded-md flex items-center space-x-1 cursor-pointer hover:bg-gray-300 transition" *ngIf="!imageSrc">
+                    <span class="material-symbols-outlined text-gray-600 text-sm">upload</span>
+                    <span class="text-xs">Upload</span>
+                  </label>
+                  <div *ngIf="imageSrc" class="relative w-20 h-20 flex items-center justify-center bg-gray-200 rounded-md p-2">
+                    <img [src]="imageSrc" alt="Uploaded Image" class="w-full h-full object-contain rounded-md" />
+                    <button (click)="removeImage('logo')" class="absolute top-0 right-0 text-sm">
+                      <span class="material-symbols-outlined">cancel</span>
+                    </button>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">Upload image in JPEG or PNG format with max. size of 1 MB.</p>
+              </div>
+
+              <!-- Invoice Title -->
+              <div class="space-y-2">
+                <div class="flex items-center space-x-4">
+                  <label class="text-sm font-semibold text-gray-700">Invoice title (optional)</label>
+                  <input type="text" class="flex-1 border border-gray-300 rounded-md shadow-sm p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" placeholder="INVOICE" [(ngModel)]="invoice">
+                </div>
+                <p class="text-xs text-gray-500">This can be adjusted to fit various invoice types. Once saved, it will serve as the default title of your invoices.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Business Information -->
+          <h2 class="text-xl font-semibold mb-4">Business Information</h2>
+          <div class="bg-white p-6 shadow-md rounded-lg border border-gray-200">
+            <div class="space-y-4 text-sm text-gray-700">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-gray-500">Business name</span>
+                <span>fnny</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-gray-500">Address</span>
+                <span>-</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-gray-500">Phone number</span>
+                <span>+62 896 52684311</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-gray-500">Email</span>
+                <span>
+                  <a href="mailto:fnnydh@gmail.com" class="text-blue-600 hover:underline">
+                    fnnydh gmail.com
+                  </a>
+                </span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-gray-500">Website</span>
+                <span>-</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-gray-500">NPWP</span>
+                <span>-</span>
+              </div>
+              <div class="text-xs text-gray-500 mt-6">
+                <a href="#" class="text-blue-600 hover:underline">To edit business information, go to General Settings.</a>
+              </div>
+            </div>
+          </div>
+          <br>
+          <!-- Payment method -->
+          <app-payment-method></app-payment-method>
+
+          <!-- Additional Information -->
+          <h2 class="text-xl font-semibold mb-4">Additional Information</h2>
+          <div class="bg-white p-6 shadow-md rounded-lg border border-gray-200">
+            <div class="space-y-4">
+              <div class="flex items-start space-x-4">
+                <label class="block text-sm font-semibold text-gray-700 w-1/3">Notes (optional)</label>
+                <div class="w-2/3">
+                  <textarea
+                    [(ngModel)]="notes"
+                    class="w-full border border-gray-300 rounded-md shadow-sm p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-sm"
+                    placeholder="Enter additional information"
+                    rows="4"
+                    maxlength="1000">
+                  </textarea>
+                  <p class="text-gray-500 text-xs text-right mt-1">{{ notesCount }}/{{ maxLength }}</p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4">
+                <label class="block text-sm font-semibold text-gray-700 w-1/3">Terms & Conditions (optional)</label>
+                <div class="w-2/3">
+                  <textarea
+                    [(ngModel)]="terms"
+                    class="w-full border border-gray-300 rounded-md shadow-sm p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-sm"
+                    placeholder="Enter business or shipping T&C"
+                    rows="4"
+                    maxlength="1000">
+                  </textarea>
+                  <p class="text-gray-500 text-xs text-right mt-1">{{ termsCount }}/{{ maxLength }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signature -->
+          <div class="space-y-4">
+            <h2 class="text-xl font-semibold mb-4">Signature</h2>
+            <div class="bg-white p-6 shadow-md rounded-lg border border-gray-200">
+              <div class="flex items-start space-x-4">
+                <label class="block text-sm font-semibold text-gray-700 w-1/3">Signatory name (optional)</label>
+                <div class="w-2/3">
+                  <textarea
+                    [(ngModel)]="signatureName"
+                    class="w-full border border-gray-300 rounded-md shadow-sm p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-sm"
+                    placeholder="Enter signatory full name"
+                    maxlength="20" [(ngModel)]="sigName">
+                  </textarea>
+                  <p class="text-gray-500 text-xs text-right mt-1">{{ signatureNameCount }}/{{ maxLengthSignature }}</p>
+                </div>
+              </div>
+                <br>
+              <div class="flex items-start space-x-4">
+                <label class="block text-sm font-semibold text-gray-700 w-1/3">Signatory role (optional)</label>
+                <div class="w-2/3">
+                  <textarea
+                    [(ngModel)]="signatureRole"
+                    class="w-full border border-gray-300 rounded-md shadow-sm p-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition  text-sm"
+                    placeholder="Enter signatory role or job title"
+                    maxlength="20" [(ngModel)]="sigRole">
+                  </textarea>
+                  <p class="text-gray-500 text-xs text-right mt-1">{{ signatureRoleCount }}/{{ maxLengthSignature }}</p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-4">
+                <label class="block text-sm font-medium mb-2">Signature (optional)</label>
+                <div class="relative flex items-center">
+                  <input type="file" id="signatureInput" class="hidden" (change)="onSignatureFileChange($event)" />
+                  <label *ngIf="!signatureSrc" for="signatureInput" class="bg-gray-200 text-gray-600 py-1 px-2 rounded-md flex items-center space-x-1 cursor-pointer hover:bg-gray-300 transition">
+                    <span class="material-symbols-outlined text-gray-600 text-sm">upload</span>
+                    <span class="text-xs">Upload</span>
+                  </label>
+                  <div *ngIf="signatureSrc" class="relative w-20 h-20 flex items-center justify-center bg-gray-200 rounded-md p-2 ml-4">
+                    <img [src]="signatureSrc" alt="Uploaded Image" class="w-full h-full object-contain rounded-md" />
+                    <button (click)="removeImage('signature')" class="absolute top-0 right-0 text-sm">
+                      <span class="material-symbols-outlined">cancel</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <p class="text-xs text-gray-500 mt-2">Upload image in JPEG or PNG format with max. size of 1 MB.</p>
+            </div>
+          </div>
+
+          <!-- Payment reminder -->
+           <br>
+          <app-payment-reminder></app-payment-reminder>
+
+          <!-- Text invoice template -->
+          <h2 class="text-xl font-semibold mb-4">Additional Information</h2>
+          <div class="bg-white p-8 shadow-lg rounded-lg border border-gray-200 max-w-5xl mx-auto">
+            <div class="flex items-start space-x-6 mb-6">
+              <label class="block font-semibold text-gray-700 mt-2 min-w-max">Header (optional)</label>
+              <textarea [(ngModel)]="headerText"
+                placeholder="Customize your text invoice header. E.g. Terima kasih atas pesanan Anda di fnny. Berikut tagihan invoice Anda:"
+                maxlength="1000"
+                rows="3"
+                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-sm"
+              ></textarea>
+            </div>
+            <p class="text-right text-sm text-gray-500">{{ headerText.length }}/1000</p>
+            <div class="mt-2">
+              <h3 class="text-lg font-bold mb-4">Preview sample</h3>
+              <p class="text-sm text-gray-500 italic mb-4">The header you typed above will appear here, values are sample only</p>
+              <div class="border p-6 rounded-md bg-gray-50">
+                <div class="flex space-x-4 text-sm">
+                  <div class="">
+                    <p class="mb-2">Halo [your customer hare],</p> <br>
+                    <p class="mb-2">{{ headerText || 'Header here' }}</p><br>
+                    <p class="mb-2">No. Invoice:  [invoice number here]</p>
+                    <p class="mb-2">Tanggal Invoice: [invoice date here]</p>
+                    <p class="mb-2">Total tagihan: [total invoice amount here]</p>
+                    <p class="mb-2">Jatuh tempo: [due date here]</p>
+                    <br>
+                    <p class="mb-2">Klik link ini untuk download invoice:</p>
+                    <p class="mb-2">[link]</p>
+                    <p class="mb-2">Bayar tagihan invoice via:</p>
+                    <p class="mb-2">[Payment Link]/[VA number]
+                    </p>
+                    <br>
+                    <p class="mt-4">Regards,</p>
+                    <br>
+                    <p>fnny</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoice Preview -->
+         <div class="col-span-12 md:col-span-6 space-y-6 mt-12">
+        <div class="bg-white p-6 shadow-lg rounded-lg">
+          <div class="flex justify-between items-center mb-6 text-sm">
+            <div class="flex items-center">
+              <div *ngIf="imageSrc" class="flex items-center mr-4">
+                <img [src]="imageSrc" alt="Uploaded Logo" class="w-20 h-20 object-contain rounded-md"/>
+              </div>
+            </div>
+            <div class="text-right">
+              <h2 class="font-bold">{{ invoice || 'INVOICE' }}</h2>
+              <p class="text-gray-600">[Invoice number here]</p>
+              <p class="text-gray-600">[Invoice date here]</p>
+            </div>
+          </div>
+          <div class="bg-yellow-100 rounded-md mb-6 inline-block p-2">
+            <span class="font-semibold text-sm">Due date:</span> <span>[due date here]</span>
+          </div>
+          <div class="flex justify-between items-start mb-6 text-xs">
+            <div class="w-1/3  text-xs">
+              <p class="font-semibold">From:</p>
+              <p>fnny</p>
+              <p>+62 896 52684311</p>
+              <p>fnnydh gmail.com</p>
+            </div>
+            <div class="w-1/3">
+              <p class="font-semibold">Bill to:</p>
+              <p>[Customer name here]</p>
+            </div>
+            <div class="w-1/3  bg-gray-100 p-4 rounded-md">
+              <p class="font-semibold">Pay via:</p>
+              <p class="text-xs text-gray-600">[Payment Link / Virtual Account here]</p>
+            </div>
+          </div>
+          <div class="mb-6">
+            <p class="font-semibold text-sm">Total amount due: -</p>
+            <p class="text-xs">Order ID: -</p>
+            <table class="w-full text-left mt-4  border-gray-200 text-xs">
+              <thead class="bg-gray-100 border-b">
+                <tr>
+                  <th class="pb-2 border-gray-200">Description</th>
+                  <th class="pb-2 border-gray-200">Qty</th>
+                  <th class="pb-2 border-gray-200">Price (Rp)</th>
+                  <th class="pb-2 border-gray-200">Disc (%)</th>
+                  <th class="pb-2 border-gray-200">Total (Rp)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="py-2 border-gray-200">-</td>
+                  <td class="py-2 border-gray-200">-</td>
+                  <td class="py-2 border-gray-200">-</td>
+                  <td class="py-2 border-gray-200">-</td>
+                  <td class="py-2 border-gray-200">-</td>
+                </tr>
+                <tr class="border-t">
+                  <td class="py-2 font-semibold border-gray-200" colspan="4">Subtotal</td>
+                  <td class="py-2 border-gray-200">-</td>
+                </tr>
+                <tr class="border-t">
+                  <td class="py-2 font-semibold border-gray-200" colspan="4">Total amount due</td>
+                  <td class="py-2 border-gray-200">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="flex items-center justify-end mb-6 text-sm">
+            <!-- Bagian SigName dan SigRole -->
+            <div class="text-right mr-4">
+              <div *ngIf="sigName">
+                <p>{{ sigName }},</p>
+              </div>
+              <div *ngIf="sigRole">
+                <p>{{ sigRole }}</p>
+              </div>
+            </div>
+            <div *ngIf="signatureSrc" class="flex items-center">
+              <div class="border-r border-gray-300 h-20 mx-4"></div>
+
+              <img [src]="signatureSrc" alt="Uploaded Signature" class="w-20 h-20 object-contain rounded-md" />
+            </div>
+          </div>
+
+
+          <div class=" gap-10 mt-6 text-xs">
+            <div *ngIf="notes">
+              <p class="font-semibold">Notes</p>
+              <p>{{ notes }}</p>
+            </div>
+              <br>
+            <div *ngIf="terms">
+              <p class="font-semibold text-xs">Terms & conditions</p>
+              <p>{{ terms }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

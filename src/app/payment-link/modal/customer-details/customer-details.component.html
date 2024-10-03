@@ -1,0 +1,60 @@
+<form class="mt-5 grid grid-cols-2 gap-4">
+    <!-- Email -->
+    <div class="col-span-1">
+      <label for="email" class="block text-xs font-medium text-gray-700">Email</label>
+      <input type="email" id="email" name="email" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+    </div>
+
+    <!-- Name -->
+    <div class="col-span-1">
+      <label for="name" class="block text-xs font-medium text-gray-700">Name</label>
+      <input type="text" id="name" name="name" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+    </div>
+
+    <!-- Phone -->
+    <div class="col-span-1">
+      <label for="phone" class="block text-xs font-medium text-gray-700">Phone</label>
+      <input type="text" id="phone" name="phone" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+    </div>
+
+    <!-- City -->
+    <div class="col-span-1">
+      <label for="city" class="block text-xs font-medium text-gray-700">City</label>
+      <input type="text" id="city" name="city" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+    </div>
+
+    <!-- Address -->
+    <div class="col-span-1">
+      <label for="address" class="block text-xs font-medium text-gray-700">Address</label>
+      <input type="text" id="address" name="address" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+    </div>
+
+    <!-- Country (Dropdown) -->
+    <div class="col-span-1">
+      <label for="country" class="block text-xs font-medium text-gray-700">Country</label>
+      <select id="country" name="country" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+        <option value="" disabled selected>Choose a Country</option>
+        <option value="us">United States</option>
+        <option value="ca">Canada</option>
+        <option value="uk">United Kingdom</option>
+        <!-- Tambahkan lebih banyak opsi sesuai kebutuhan -->
+      </select>
+    </div>
+
+    <!-- Postal Code -->
+    <div class="col-span-1">
+      <label for="postal" class="block text-xs font-medium text-gray-700">Postal Code</label>
+      <input type="text" id="postal" name="postal" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1">
+    </div>
+
+    <!-- Notes -->
+    <div class="col-span-2">
+      <label for="notes" class="block text-xs font-medium text-gray-700">Notes</label>
+      <textarea id="notes" name="notes" rows="3" class="w-full border-b-2 border-gray-300 focus:border-blue-500 outline-none py-1"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="col-span-2 flex justify-end">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Submit</button>
+    </div>
+  </form>
