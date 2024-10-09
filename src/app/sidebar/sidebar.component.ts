@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,6 +16,12 @@ export class SidebarComponent {
   dropdownOpen = false;
 
   toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen; // Toggle the dropdown visibility
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  constructor(private router: Router) {}
+
+  isActive(page: string): boolean {
+    return this.router.url === page;
   }
 }

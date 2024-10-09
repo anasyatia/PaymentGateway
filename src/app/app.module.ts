@@ -9,6 +9,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { CalendarModule } from 'primeng/calendar';
+import { TransactionsState } from './transactions/state/transactions.state';
+import { NgxsModule } from '@ngxs/store';
 
 
 
@@ -26,7 +28,7 @@ import { CalendarModule } from 'primeng/calendar';
     TransactionsComponent,
     CalendarModule,
     ReactiveFormsModule
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

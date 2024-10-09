@@ -10,6 +10,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsDispatchPluginModule } from '@ngxs-labs/dispatch-decorator';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TransactionsState } from './transactions/state/transactions.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig = {
       NgxsReduxDevtoolsPluginModule.forRoot(),
       NgxsDispatchPluginModule.forRoot(),
       NgxsModule.forRoot([
+        TransactionsState
       ]),
       ReactiveFormsModule,
       CommonModule

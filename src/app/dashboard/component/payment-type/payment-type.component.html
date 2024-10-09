@@ -19,12 +19,10 @@
       <button (click)="toggleDropdown()" class="flex items-center justify-between bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 transition">
         <div class="flex items-center space-x-2">
           <span class="material-symbols-outlined text-lg">calendar_month</span>
-          <span class="pi pi-calendar text-lg"></span>
           <span class="font-semibold">{{ dateRangeText }}</span>
         </div>
         <div class="flex items-center space-x-1">
           <i class="pi pi-angle-down text-lg"></i>
-          <span class="material-symbols-outlined text-lg">arrow_drop_down</span>
         </div>
       </button>
       <ul *ngIf="dropdownOpen" class="absolute right-0 mt-1 bg-white border rounded shadow-md text-xs z-10">

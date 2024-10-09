@@ -61,6 +61,6 @@ export class RangeDateComponent {
     if (this.rangeDates) {
       this.dateRangeSelected.emit(this.rangeDates);
     }
-    this.closeDate(); // Close the date range picker modal
+    this.closeDate(); 
   }
 }

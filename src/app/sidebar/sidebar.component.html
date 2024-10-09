@@ -2,72 +2,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Nova+Slim&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-<div class="flex justify-center items-center h-screen">
+<div class="bg-gray-50 flex justify-center items-center h-screen">
   <div class="bg-gradient-to-br bg-[#427D9D] w-[250px] h-[98vh] py-6 px-4 rounded-3xl">
     <div class="flex items-center mb-8">
       <span class="material-symbols-outlined" style="font-size: 32px; color: white;">
         account_balance
     </span>
-
       <h1 class="text-white text-3xl ml-3 font-nova-slim">midtrans</h1>
     </div>
     <div class="text-white">
       <ul>
         <li class="mb-4">
-          <a [routerLink]="['/dashboard']" class="gap-3 flex items-center hover:bg-[#102C57] p-2 rounded-md">
-            <span class="material-symbols-outlined">dashboard</span>Dashboard
+          <a
+            [routerLink]="['/dashboard']"
+            class="gap-3 flex items-center p-2 w-full rounded-md transition-all"
+            [ngClass]="isActive('/dashboard') ? 'bg-white text-[#164863]' : 'hover:bg-[#164863] text-white'">
+            <span class="material-symbols-outlined">dashboard</span>
+            Dashboard
           </a>
         </li>
         <li class="mb-4">
-          <a [routerLink]="['/transactions']" class="gap-3 flex items-center hover:bg-[#102C57] p-2 rounded-md">
+          <a [routerLink]="['/transactions']"
+          class="gap-3 flex items-center p-2 w-full rounded-md transition-all"
+          [ngClass]="isActive('/transactions') ? 'bg-white text-[#164863]' : 'hover:bg-[#164863] text-white'">
             <span class="material-symbols-outlined">payments</span>Transactions
             <span class="ml-2 bg-yellow-500 text-black px-2 rounded text-sm">BETA</span>
           </a>
         </li>
         <li class="mb-4">
-          <a [routerLink]="['/balance']" class="gap-3 flex items-center hover:bg-[#102C57] p-2 rounded-md">
+          <a [routerLink]="['/balance']"
+          class="gap-3 flex items-center p-2 w-full rounded-md transition-all"
+          [ngClass]="isActive('/balance') ? 'bg-white text-[#164863]' : 'hover:bg-[#164863] text-white'">
             <span class="material-symbols-outlined">receipt_long</span>Balance
             <span class="ml-2 bg-yellow-500 text-black px-2 rounded text-sm">BETA</span>
           </a>
         </li>
         <li class="mb-4">
-          <a [routerLink]="['/payment-link']" class="gap-3 flex items-center hover:bg-[#102C57] p-2 rounded-md">
+          <a [routerLink]="['/payment-link']"
+          class="gap-3 flex items-center p-2 w-full rounded-md transition-all"
+          [ngClass]="isActive('/payment-link') ? 'bg-white text-[#164863]' : 'hover:bg-[#164863] text-white'">
             <span class="material-symbols-outlined">credit_card</span>Payment Link
           </a>
         </li>
         <div>
           <li class="mb-4">
-            <a (click)="toggleDropdown()" class="flex gap-3 items-center hover:bg-[#102C57] p-3 rounded-md transition-colors duration-200 cursor-pointer">
+            <!-- Modify the background based on dropdownOpen -->
+            <a (click)="toggleDropdown()" class="flex gap-3 items-center p-3 w-full rounded-md transition-all duration-200 cursor-pointer"
+               [ngClass]="{'bg-white text-[#164863]': dropdownOpen, 'hover:bg-[#164863] text-white': !dropdownOpen}">
               <span class="material-symbols-outlined text-lg">price_check</span>
               <span class="text-base font-medium">Invoicing</span>
               <span class="ml-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">NEW</span>
-              <span class="ml-auto material-symbols-outlined text-lg" [class.rotate-180]="dropdownOpen">expand_more</span>
+              <span class="ml-auto material-symbols-outlined text-lg transform transition-transform duration-300"
+                    [ngClass]="{'rotate-180': dropdownOpen}">
+                expand_more
+              </span>
             </a>
           </li>
-          <ul *ngIf="dropdownOpen">
-            <li class="pl-8">
-              <a [routerLink]="['/invoice']" class="mb-4 flex items-center hover:bg-[#102C57] p-2 rounded-md">
-                <span class="flex gap-3 text-base">Invoicing</span>
+          <ul *ngIf="dropdownOpen" class="ml-8 transition-opacity duration-300">
+            <li class="mb-2">
+              <a [routerLink]="['/invoice']" class="flex items-center hover:bg-[#164863] p-2 rounded-md w-full">
+                <span class="text-base">Invoicing</span>
               </a>
             </li>
-            <li class="pl-8">
-              <a [routerLink]="['/invoice/ip-whitelist']" class="mb-4 flex items-center hover:bg-[#102C57] p-2 rounded-md">
-                <span class="flex gap-3 text-base">IP Whitelist</span>
+            <li class="mb-2">
+              <a [routerLink]="['/invoice/ip-whitelist']" class="flex items-center hover:bg-[#164863] p-2 rounded-md w-full">
+                <span class="text-base">IP Whitelist</span>
               </a>
             </li>
           </ul>
         </div>
-        <!-- <li class="mb-4">
-          <a href="#" class="flex gap-3 items-center hover:bg-[#102C57] p-2 rounded-md">
-            <span class="material-symbols-outlined">person</span>Account
-          </a>
-        </li>
-        <li class="mb-4">
-          <a href="#" class="flex gap-3 items-center hover:bg-[#102C57] p-2 rounded-md">
-            <span class="material-symbols-outlined">settings</span>Settings
-          </a>
-        </li> -->
       </ul>
     </div>
   </div>
 </div>
+

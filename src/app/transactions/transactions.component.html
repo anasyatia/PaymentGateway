@@ -1,62 +1,76 @@
-<div class="flex">
-  <div style="margin-left: 0.5%">
+<div class="flex h-screen overflow-y-hidden">
+  <div style="margin-left: 0.5%" >
     <app-sidebar></app-sidebar>
   </div>
 
-  <div class="flex-1">
+  <div class="bg-gray-50 flex-1 overflow-y-auto" >
     <app-navbar></app-navbar>
     <div class="container mx-auto p-6">
       <div class="flex justify-between items-center">
-        <h1 class="text-3xl font-bold">Transaction List</h1>
-        <button class="flex items-center gap-1 px-4 py-2 text-gray-500 bg-gray-100 rounded-lg">
-          <i class="pi pi-upload text-base"></i>
-          <span class="text-sm">Ekspor</span>
+        <h1 class="text-3xl font-semibold text-gray-700 mb-4">Transaction List</h1>
+        <button class="bg-gray-200 text-gray-600 py-2 px-4 rounded hover:bg-gray-300 flex items-center w-auto">
+          <!-- <span class="material-symbols-outlined ">
+            upgrade
+          </span> -->
+          Export
         </button>
-
       </div>
 
-      <div class="flex gap-4 mt-6">
-        <div class="relative w-1/4">
-          <select
-            [(ngModel)]="selectedFilter"
-            (change)="onFilterChange()"
-            class="w-full px-4 py-2 border rounded-md bg-white select-hover">
-            <option value="Order ID">Order ID</option>
-            <option value="ID Transaksi">Transactions ID</option>
-            <option value="Email Pelanggan">Customer e-mail</option>
-          </select>
-          <i class="pi pi-angle-down absolute right-4 top-3"></i>
-        </div>
+      <div class="flex items-center mb-4">
+        <button
+        id="dropdown-button"
+        class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-e-0 border-gray-300 dark:border-gray-700 dark:text-white rounded-s hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        type="button"
+      >
+      <select class="bg-transparent outline-none"  [(ngModel)]="selectedFilter"
+      (change)="onFilterChange()">
+      <option value="Order ID">Order ID</option>
+      <!-- <option value="ID Transaksi">Transactions ID</option>
+      <option value="Email Pelanggan">Customer e-mail</option> -->
+        </select>
+      </button>
 
-        <div class="flex items-center w-1/2 border rounded-md border-hover">
-          <i class="pi pi-search px-3"></i>
-          <input type="text" [placeholder]="placeholderText" class="w-full px-4 py-2 outline-none" />
-        </div>
+      <div class="relative w-2/5 flex items-center">
+        <span class="absolute left-2 top-1/2 transform -translate-y-1/2">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+            <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+          </svg>
+        </span>
+        <input
+          type="text"
+          [(ngModel)]="orderId"
+          [placeholder]="placeholderText"
+          class="pl-10 rounded-e p-2 hover:bg-gray-200 border border-gray-300 dark:border-gray-600 text-left w-full focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+        />
+      </div>
 
-        <div class="w-1/6">
-          <button class="w-full px-4 py-2 border rounded-md text-gray-500 bg-white button-hover" (click)="openFilterModal()">
-            <span class="text-sm">Filter</span>
-            <span class="material-symbols-outlined">
-              arrow_drop_down
-            </span>
-            <i class="pi pi-calendar"></i>
-          </button>
-        </div>
+        <button
+          (click)="openFilterModal()"
+          class="ml-4 w-48 hover:bg-gray-200 rounded p-2 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-left flex justify-between items-center"
+        >
+          Filter
+          <span class="material-symbols-outlined">
+            arrow_drop_down
+          </span>
+        </button>
 
-        <div class="flex items-center w-1/3 border rounded-md relative border-hover">
-          <button class="w-full px-4 py-2 flex items-center justify-between" (click)="showRangeDate = true">
-            <span *ngIf="selectedDateRange">
-              {{ selectedDateRange[0] | date:'shortDate' }} - {{ selectedDateRange[1] | date:'shortDate' }}
-            </span>
-            <span *ngIf="!selectedDateRange">Date Range</span>
-            <span class="material-symbols-outlined ml-2">calendar_month</span>
-          </button>
-          <app-range-date
+        <button
+          (click)="showRangeDate = true"
+          class="ml-4 w-60 rounded hover:bg-gray-200 p-2 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-left flex justify-between items-center"
+        >
+        <span *ngIf="selectedDateRange">
+          {{ selectedDateRange[0] | date:'shortDate' }} - {{ selectedDateRange[1] | date:'shortDate' }}
+        </span>
+        <span *ngIf="!selectedDateRange">Date Range</span>
+        <span class="material-symbols-outlined ml-2">calendar_month</span>
+        </button>
+
+        <app-range-date
             *ngIf="showRangeDate"
             (close)="onModalClose()"
             (dateRangeSelected)="onDateRangeSelected($event)">
           </app-range-date>
-        </div>
+
       </div>
 
       <div class="flex justify-end mt-6">
@@ -68,7 +82,7 @@
             More filter
           </button>
 
-          <button class="px-4 py-2 bg-gray-500 text-white rounded-md button-apply-hover">
+          <button class="px-4 py-2 bg-gray-500 text-white rounded-md button-apply-hover" (click)="onSearch()">
             Apply
           </button>
         </div>
@@ -79,12 +93,40 @@
         (closeModal)="closeFilterMoreModal()">
       </app-more-filter>
 
-      <div class="flex flex-col items-center justify-center mt-16">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-4">Date & Time</th>
+              <th scope="col" class="px-6 py-4">Order ID</th>
+              <th scope="col" class="px-6 py-4">Transaction Type</th>
+              <th scope="col" class="px-6 py-4">Channel</th>
+              <th scope="col" class="px-6 py-4">Status</th>
+              <th scope="col" class="px-6 py-4">Amount</th>
+              <th scope="col" class="px-6 py-4">Customer Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of transactions" class="bg-white dark:bg-gray-900 border-b dark:border-gray-700">
+              <td class="px-6 py-4 text-gray-900 dark:text-white">{{transaction.dateTime  }}</td>
+              <td class="px-6 py-4">{{ transaction.orderId }}</td>
+              <td class="px-6 py-4">{{ transaction.transactionType }}</td>
+              <td class="px-6 py-4">{{ transaction.channel }}</td>
+              <td class="px-6 py-4">{{ transaction.status }}</td>
+              <td class="px-6 py-4">{{ transaction.amount }}</td>
+              <td class="px-6 py-4">{{ transaction.customerEmail }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- <div class="flex flex-col items-center justify-center mt-16">
         <p class="mt-4 text-gray-600 text-lg">You have no transaction yet</p>
         <p class="text-gray-400">
           Once there's any, it will be shown here
         </p>
-      </div>
+      </div> -->
     </div>
     <app-filter *ngIf="displayFilterModal" (closeFilterModal)="closeFilterModal()"></app-filter>
 
